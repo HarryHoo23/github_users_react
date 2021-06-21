@@ -6,11 +6,63 @@ import { FiUsers, FiUserPlus } from 'react-icons/fi';
 
 const UserInfo = () => {
   const { githubUser } = useGlobalContext();
+  console.log(githubUser);
+  
   const { public_repos, followers, following, public_gists } = githubUser;
-  
-  
-  return <h2>user info component</h2>;
+
+  const items = [
+    {
+      id: 1,
+      icon: <GoRepo className='icon' />,
+      label: 'Repos',
+      value: public_repos,
+      color: 'pink'
+    },
+    {
+      id: 2,
+      icon: <FiUsers className='icon' />,
+      label: 'Followers',
+      value: followers,
+      color: 'green'
+    },
+    {
+      id: 3,
+      icon: <FiUserPlus className='icon' />,
+      label: 'Following',
+      value: following,
+      color: 'purple'
+    },
+    {
+      id: 4,
+      icon: <GoGist className='icon' />,
+      label: 'gists',
+      value: public_gists,
+      color: 'yellow'
+    }
+  ];
+
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        {items.map(item => {
+          return <Item key={item.id} {...item}></Item>
+          //Spread operator to copy all the item
+        })}
+      </Wrapper>
+    </section>
+  );
 };
+
+//Define a component Item
+const Item = ({ icon, label, value, color }) => {
+  return <article className="item">
+    <span className={color}>{icon}</span>
+    <div>
+      <h3>{value}</h3>
+      <p>{label}</p>
+    </div>
+  </article>
+}
 
 const Wrapper = styled.section`
   display: grid;
