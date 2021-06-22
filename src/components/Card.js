@@ -38,7 +38,7 @@ const Card = () => {
         </p>
         <a href={`https://${blog}`} target="_blank">
           <MdLink />
-          {blog}
+          {blog || 'This person is too lazy to set a website!'}
         </a>
       </div>
     </Wrapper>
